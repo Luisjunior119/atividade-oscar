@@ -119,4 +119,4 @@ insert into movies (year_film, year_ceremony, ceremony, category, `name`, film, 
 
 16- Agora vamos falar da sua vida. Me diga o nome de uma pessoa que você admira e o que ela fez na sua vida. Agora me diz: Quê prêmio essa pessoa merece? 
 
-R: Minha mãe, Edjane. A pessoa mais forte que eu conheço, me apoia em tudo e é meu alicerce,
+R: Minha mãe, Edjane. A pessoa mais forte que eu conheço, me apoia em tudo e é meu alicerce, ela merece as melhores coisas do mundo e sei que vou proporcionar tudo isso a ela.
