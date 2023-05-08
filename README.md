@@ -1,50 +1,122 @@
-Muito bem, Pessoal...
-Hoje vamos trabalhar com o Oscar. A ideia de premiar ou ser premiado é para reconhecer:
-Reconhecer uma qualidade
-Reconhecer um atributo
-Reconhecer o esforço...
+Atvidade de Banco de Dados
+
+Muito bem, Pessoal... 
+
+Hoje vamos trabalhar com o Oscar.
+A ideia de premiar ou ser premiado é para reconhecer:
+- Reconhecer uma qualidade
+- Reconhecer um atributo
+- Reconhecer o esforço... 
+
 Reconhecer sempre.
-Nem todos os prêmios são merecidos e nem todos que merecem ganham. Então vale mesmo a pena, premiar?
-USO DOS COMANDOS SQL
-1)-Quantas vezes Natalie Portman foi indicada ao Oscar? R: Ela foi indicadas 3 vezes. QUERY EM SQL SELECT COUNT(*) FROM oscar WHERE name LIKE '%Natalie Portman%';
 
-2)-Quantos Oscars Natalie Portman ganhou? R: Ela venceu uma vez. QUERY EM SQL SELECT COUNT(*) FROM oscar WHERE name LIKE '%Natalie Portman%' AND winner LIKE '%True%';
+Nem todos os prêmios são merecidos e nem todos que merecem ganham prêmios. 
+Então vale mesmo a pena, premiar? 
 
-3)-Amy Adams já ganhou algum Oscar? R: Ela nunca venceu. QUERY EM SQL SELECT COUNT(*) FROM oscar WHERE name LIKE '%Amy Adams%' AND winner LIKE '%True%';
+*Quantas vezes Natalie Portman foi indicada ao Oscar?* 
 
-4)-Alguém já ganhou um Oscar e tem o seu primeiro nome?? R: Não
+**R: Natalie Portman foi indicada ao Oscar três vezes**
 
-QUERY EM SQL SELECT COUNT(*) FROM oscar WHERE name LIKE '%Diego%' AND winner LIKE '%True%';
+<code> select count(*) from movies where name = "Natalie Portman"; </code>
 
-5)-Toy Story 3 ganhou um Oscar em quais anos?/b> R: 2011 QUERY EM SQL SELECT name, year_film FROM oscar WHERE film LIKE '%Toy Story 3%' AND winner LIKE '%True%';
 
-6)-Quem tem mais Oscars: a categoria "Melhor Ator" ou "Melhor Filme"?</b R: Melhor Ator
+*Quantos Oscars Natalie Portman ganhou?*
 
-QUERY EM SQL SELECT category, COUNT(category) FROM oscar WHERE category LIKE '%ACTOR' OR category LIKE '%CINEMATOGRAPHY' AND winner LIKE '%True%' GROUP BY category;
+**R: Natalie Portman ganhou o Oscar uma vez**
 
-7)-O primeiro Oscar para melhor Atriz foi para quem? Em que ano?/b> R: Janet Gaynor em 1928 QUERY EM SQL SELECT name, MIN(year_ceremony) FROM oscar WHERE category LIKE '%ACTRESS%' AND winner LIKE '%True%';
+<code> select count(*) from movies where name = "Natalie Portman" and  winner = "true"; </code>
 
-8)-Na categoria Winner, altere todos os valores com "True" para 1 e todos os valores "False" para 0./b> R: UPDATE oscar SET winner = '1' WHERE winner LIKE '%True%' R: UPDATE oscar SET winner = '0' WHERE winner LIKE '%False%'
+*Amy Adams já ganhou algum Oscar?*
 
-9)-Em qual edição do Oscar "Crash" ganhou o prêmio? R: Em 2006 QUERY EM SQL SELECT year_ceremony FROM oscar WHERE film LIKE '%Crash' AND winner LIKE '%1%';
+**R: Amy Adams não ganhou o Oscar**
 
-10)-Que filme merecia ganhar um Oscar e não ganhou? R: Joker
+<code> select * from movies where name = "Amy Adams" and winner= "winner"; </code>
 
-11)-Bom... dê um Oscar para esse filme, então. R: UPDATE oscar SET winner = '1' WHERE id = 10294
+*Toy Story 3 ganhou um Oscar em quais anos?*
 
-12)-O filme Central do Brasil aparece no Oscar? R: Não QUERY EM SQL SELECT * FROM oscar WHERE film LIKE '%Central do Brasil';
+**R: Toy Story 3 ganhou um Oscar em 2011**
 
-13)-Aliás... Qual sua opinião sobre central do Brasil R: Nunca assisti ,as vou colocar na minha base de dados
+<code>select  year_ceremony from movies where film = "Toy Story 3" and winner= "true";</code>
 
-14)-Inclua no banco 7 filmes que nunca nem foram nomeados ao Oscar, mas que na sua opinião, merecem. R: INSERT INTO oscar (year_film, category, name, film, winner) VALUES ('1980', 'CINEMATOGRAPHY', 'Charles Chaplin', 'Tempos Modernos', '0'), ('1980', 'CINEMATOGRAPHY', 'Stanley Kubrick', 'O Iluminado', '0'), ('1988', 'CINEMATOGRAPHY', 'Hayao Miyazaki', 'Meu Amigo Totoro', '0'), ('1993', 'CINEMATOGRAPHY', 'Harold Ramis', 'Feitiço do Tempo', '0'), ('1997', 'CINEMATOGRAPHY', 'Hayao Miyazaki', 'Princesa Mononoke', '0'), ('2016', 'CINEMATOGRAPHY', 'Makoto Shinkai', 'Your Name', '0'), ('2017', 'CINEMATOGRAPHY', 'Patty Jenkins', 'Mulher-Maravilha', '0');
+*Quem tem mais Oscars: a categoria "Melhor Ator" ou "Melhor Filme"?*
 
-15)-Crie uma nova categoria de premiação. Qualquer prêmio que você queira dar. Agora vamos dar esses prêmios aos filmes que você cadastrou na questão acima. R: ALTER TABLE oscas ADD curto BINARY; R: UPDATE oscar SET curto = 1 WHERE id BETWEEN 10396 AND 10403;
+**R: A catergoria "Melhor Filme" tem mais Oscars**
+ 
+ <code> select count(*) from movies where category= "BEST PICTURE" and winner="true";
+ select count(*) from movies where category= "Actor" and winner="true"; </code>
 
-16)-Qual foi o primeiro ano a ter um prêmio do Oscar?. R: Em 1928 QUERY EM SQL SELECT MIN(year_ceremony) FROM oscar;
+*O primeiro Oscar para melhor Atriz foi para quem? Em que ano?*
 
-17)-Pensando no ano em que você nasceu: Qual foi o Oscar de melhor filme, Melhor Atriz e Melhor Diretor? R: Melhor atriz foi: Louise Dresser Melhor filme foi: Crouching Tiger, Hidden Dragon Melhor diretor foi: Steven Soderbergh QUERY EM SQL SELECT name, film, category FROM oscar WHERE category LIKE '%CINEMATOGRAPHY' OR category LIKE '%ACTRESS' OR category LIKE '%DIRECTING' AND winner LIKE '%1%' AND year_ceremony = '2001' GROUP BY category;
+ **R: O primeiro Oscar para melhor Atriz foi para Janet Gaynor no ano de 1927**
+ 
+<code> select name, year_film from movies where winner= "true" and category= "Actress"; </code>
 
-18)-Agora procure 7 atrizes que não sejam americanas, europeias ou brasileiras. Vamos cadastrá-los no nosso banco, mas eles ainda não ganharam o Oscar. Só foram nomeados. R: INSERT INTO oscar (name) VALUES ('Cameron Diaz'), ('Drew Barrymore'), ('Sarah Polley'), ('Emily Blunt'), ('Robin Wright'), ('Charlotte Gainsbourg'), ('Kirsten Dunst');
+*Na coluna/campo Winner, altere todos os valores com "True" para 1 e todos os valores "False" para 0.*
 
-20)-Utilizando o comando 'Alter Table', troque os tipos dos dados da coluna/campo "Winner" para Bit. R: ALTER TABLE oscar MODIFY COLUMN winner BINARY;
+<code> update movies set winner= 0 where winner= "false";
+ update movies set winner= 1 where winner= "true"; </code>
 
+*Em qual edição do Oscar "Crash" ganhou o prêmio principal?*
+
+**R: "Crash" ganhou o prêmio de melhor filme na 78° edição do Oscar, no ano de 2006**
+
+ <code> select * from movies where film="Crash" and winner=1 and category="BEST PICTURE"; </code>
+
+*Na sua opinião, que filme merecia ganhar um Oscar e não ganhou?*
+
+**R: The Imitation Game**
+
+*Bom... dê um Oscar para esse filme, então.*
+
+<code> update movies set winner=1 where id_movie=9718; </code>
+
+*O filme Central do Brasil aparece no Oscar?*
+
+**R: Não.**
+
+<code> select * from movies where film="Central do Brasil"; </code>
+
+*Aliás... Qual sua opinião sobre Central do Brasil?*
+
+**R: Ainda não assisti. Pelo trailer que vi, parece um filme interessante.** 
+
+*Inclua no banco 3 filmes que nunca nem foram nomeados ao Oscar, mas que na sua opinião, merecem.*
+
+**R: "Modern Times";"Persuasion";"O Auto da Compadecida".**
+
+<code> insert into movies (year_film, year_ceremony, ceremony, category, `name`, film, winner) values (1936, 1937, 9, 'BEST PICTURE', 'Charlie Chaplin', 'Modern Times', 0);
+insert into movies (year_film, year_ceremony, ceremony, category, `name`, film, winner) values (2022,2023, 95, 'WRITING (Adaptation)', 'Jane Austen', 'Persuasion', 0 );
+insert into movies (year_film, year_ceremony, ceremony, category, `name`, film, winner) values (200,2001,72,'BEST PICTURE', 'Guel Arraes', 'O Auto da Compadecida',0 ); </code>
+
+*Crie uma nova categoria de premiação. Qualquer prêmio que você queira dar. Agora vamos dar esses prêmios aos filmes que você cadastrou na questão acima.*
+
+**R: Categoria: "Everyone should watch"**
+
+<code> update movies set category= "Everyone Should Watch" where id_movie= 10397 or id_movie= 10398 or id_movie = 10399; </code>
+
+*Qual foi o primeiro ano a ter um prêmio do Oscar?*
+
+**R:Em 1928.**
+
+<code> select year_film, year_ceremony from movies where winner= 1; </code>
+
+*Pensando no ano em que você nasceu: Qual foi o Oscar de melhor filme, Melhor Atriz e Melhor Diretor?*
+
+**R: O Oscar de melhor filme foi para: "Chicago"; o de melhor diretor para:"The Pianist"; e não houve prêmio de melhor de atriz.**
+
+<code> select * from movies where category="BEST PICTURE" and year_ceremony= 2003 and winner=1 or category="DIRECTING" and year_ceremony= 2003 and winner=1 or category="ACTRESS" and year_ceremony= 2003 and winner=1 order by category; </code>
+
+*Agora procure 7 atrizes que não sejam americanas, europeias ou brasileiras.  Vamos cadastrá-los no nosso banco, mas eles ainda não ganharam o Oscar. Só foram nomeados.*
+** R:Letitia Wright, Hanggini Purinda Retto, Amy Sun, Seo Ye-ji, Gal Gadot, Pallavi Sharda e  Hazal Kaya. **
+
+<code> insert into movies (year_film, year_ceremony, ceremony, category, `name`, film, winner) values (2018, 2019, 91, 'ACTRESS', 'Letitia Wright', 'Black Panther', 0);
+insert into movies (year_film, year_ceremony, ceremony, category, `name`, film, winner) values (2021, 2022, 94, 'ACTRESS', 'Hanggini Purinda Retto', 'Geez & Ann', 0);
+insert into movies (year_film, year_ceremony, ceremony, category, `name`, film, winner) values (2018, 2019, 91, 'ACTRESS', 'Amy Sun', 'Accidentally in Love', 0);
+insert into movies (year_film, year_ceremony, ceremony, category, `name`, film, winner) values (2020, 2021, 92, 'ACTRESS', 'Seo Ye-ji', "It's Okay to Not Be Okay", 0);
+insert into movies (year_film, year_ceremony, ceremony, category, `name`, film, winner) values (2022, 2023, 95, 'ACTRESS', 'Gal Gadot', 'Death on the Nile', 0);
+insert into movies (year_film, year_ceremony, ceremony, category, `name`, film, winner) values (2021,2022,94,'ACTRESS', 'Pallavi Sharda', 'wedding season', 0);
+insert into movies (year_film, year_ceremony, ceremony, category, `name`, film, winner) values (2022, 2023, 95, 'ACTRESS', 'Hazal Kaya', 'Midnight at the Pera Palace', 0); </code>
+
+16- Agora vamos falar da sua vida. Me diga o nome de uma pessoa que você admira e o que ela fez na sua vida. Agora me diz: Quê prêmio essa pessoa merece? 
+
+R: Minha mãe, Edjane. A pessoa mais forte que eu conheço, me apoia em tudo e é meu alicerce,
