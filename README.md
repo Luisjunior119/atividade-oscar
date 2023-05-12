@@ -102,7 +102,16 @@ insert into movies (year_film, year_ceremony, ceremony, category, `name`, film, 
 
 *Pensando no ano em que você nasceu: Qual foi o Oscar de melhor filme, Melhor Atriz e Melhor Diretor?*
 
-**R: O Oscar de melhor filme foi para: "Chicago"; o de melhor diretor para:"The Pianist"; e não houve prêmio de melhor de atriz.**
+</h3>
+Em 2003, o melhor filme foi Chicago, Adrien Brody ganhou o prêmio de Melhor Ator e Nicole Kidman o de Melhor Atriz.
+<h4> Melhor filme</h4>
+<code>SELECT * FROM movies where year_ceremony like '2003' and category like '%BEST PICTURE%' and winner = 1;</code>
+
+<h4>Melhor Atriz</h4>
+<code>SELECT * FROM movies where year_ceremony like '%2003%' and category like '%ACTRESS%' and winner = 1;</code>
+
+<h4>Melhor diretor</h4>
+<code>SELECT * FROM movies where year_ceremony like '%2003%' and category like '%DIRECTING%' and winner = 1;</code>
 
 <code> select * from movies where category="BEST PICTURE" and year_ceremony= 2003 and winner=1 or category="DIRECTING" and year_ceremony= 2003 and winner=1 or category="ACTRESS" and year_ceremony= 2003 and winner=1 order by category; </code>
 
